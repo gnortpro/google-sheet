@@ -13,14 +13,14 @@ const Home: NextPage = () => {
 
     const data: any = JSON.parse(message)
       .data.serpResponse.results.edges?.map(
-        ({ relay_rendering_strategy }) => relay_rendering_strategy
+        ({ relay_rendering_strategy }: any) => relay_rendering_strategy
       )
-      ?.map(({ view_model }) => view_model)
-      ?.map(({ profile }) => profile);
+      ?.map(({ view_model }: any) => view_model)
+      ?.map(({ profile }: any) => profile);
     console.log('data', data);
 
     const rawResponse = await Promise.all(
-      data?.map((item) =>
+      data?.map((item: any) =>
         fetch('/api/submit', {
           method: 'POST',
           headers: {
@@ -36,7 +36,7 @@ const Home: NextPage = () => {
         })
       )
     );
-console.log('rawResponse', rawResponse)
+    console.log('rawResponse', rawResponse);
 
     // print to screen
     // alert(content.data.tableRange)
